@@ -1,0 +1,69 @@
+<div class="card" style="width: 25rem;">
+  <div class="card-body">
+    <form [formGroup]="fromTemplate" (submit)="onSubmit(fromTemplate.value)">
+      <div class="text-center">
+        <img
+          [src]="imgSrc"
+          width="350px"
+          heigth="100px"
+          (click)="fileUplaoder.click()"
+        />
+      </div>
+      <div class="form-group">
+        <label>Or choose file</label>
+        <input
+          #fileUplaoder
+          type="file"
+          class="form-control"
+          formControlName="imageUrl"
+          (change)="showPreview($event)"
+          accept="image/*"
+        />
+        <div
+          class="text-danger"
+          *ngIf="isSubmitted && formControls.imageUrl.errors?.required"
+        >
+          Image is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input
+          class="form-control"
+          formControlName="caption"
+          placeholder="Caption"
+        />
+        <div
+          class="text-danger"
+          *ngIf="isSubmitted && formControls.caption.errors?.required"
+        >
+          Caption is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <select class="form-control" formControlName="category">
+          <option value="Animal">Animal</option>
+          <option value="Bird">Bird</option>
+          <option value="Vehicle">Vehicle</option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <a
+            routerLink="/image/list"
+            type="submit"
+            class="btn btn-primary btn-block float-left"
+          >
+            Go to Gallery
+          </a>
+        </div>
+        <div class="form-group col-md-6">
+          <button type="submit" class="btn btn-success btn-block float-right">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
